@@ -1,0 +1,32 @@
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  /api/users/getUsers:
+    get:
+      tags: [Users]
+      summary: Retorna a lista de todos os utilizadores
+      responses:
+        200:
+          description: Sucesso
+          
+  /api/users:
+    get:
+      tags: [Users]
+      summary: Retorna a lista de todos os utilizadores
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "Sucesso"
+        400:
+          description: "Acesso não autorizado"
+          content:
+            application/json:
+              schema:
+                $ref: './components.yaml#/components/schemas/ErrorResponse'
+  

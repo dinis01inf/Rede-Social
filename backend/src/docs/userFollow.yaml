@@ -1,0 +1,23 @@
+paths:
+  /api/userFollows/:
+    post:
+      tags: [uFollow]
+      summary: Cria uma nova ligação de seguidor entre dois utilisadores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [followerId, followingId]
+              properties:
+                followerId:
+                  type: Number
+                  example: 2
+                followingId:
+                  type: number
+                  example: 3
+
+      responses:
+        200:
+          description: Sucesso

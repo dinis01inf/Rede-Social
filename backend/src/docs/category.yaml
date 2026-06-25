@@ -1,0 +1,8 @@
+paths:
+  /api/category/:
+    get:
+      tags: [Category]
+      summary: Retorna a lista de todas as categorias
+      responses:
+        200:
+          description: Sucesso

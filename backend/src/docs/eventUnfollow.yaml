@@ -1,0 +1,23 @@
+paths:
+  /api/eventFollows/:
+    delete:
+      tags: [eFollow]
+      summary: Acaba uma nova ligação de seguidor entre um evento e um utilizador
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [followerId, followingId]
+              properties:
+                followerId:
+                  type: Number
+                  example: 2
+                followingId:
+                  type: number
+                  example: 3
+
+      responses:
+        200:
+          description: Sucesso

@@ -1,0 +1,8 @@
+paths:
+  /api/events/:
+    get:
+      tags: [Events]
+      summary: Retorna a lista de todos os eventos
+      responses:
+        200:
+          description: Sucesso

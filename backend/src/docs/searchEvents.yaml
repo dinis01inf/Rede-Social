@@ -1,0 +1,15 @@
+paths:
+  /api/events/search:
+    get:
+      tags: [Events]
+      summary: retorna os utilizadores com a keyword no nome de evento
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          schema:
+            type: String
+            example: "a"
+      responses:
+        200:
+          description: Sucesso

@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model User {
+  id             Int               @id @default(autoincrement())
+  fullName       String
+  email          String            @unique
+  createdAt      DateTime          @default(now())
+  password       String
+  creatorEvents  Events[]
+  eventUpdates   UserEventUpdate[]
+  following      UserFollow[]      @relation("follower")
+  followed       UserFollow[]      @relation("following")
+  followedEvents eventFollows[]
+  notifications  Notification[]    @relation("Notification")
+}
+
+model UserFollow {
+  followerId  Int
+  followingId Int
+  follower    User @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@id([followerId, followingId])
+}
+
+model Categoria {
+  id     Int      @id @default(autoincrement())
+  nome   String
+  events Events[]
+}
+
+model Events {
+  id          Int               @id @default(autoincrement())
+  startDate   DateTime
+  endDate     DateTime
+  categoriaId Int
+  createdBy   Int
+  visibility  Boolean           @default(true)
+  description String
+  name        String
+  local       String?
+  categoria   Categoria         @relation(fields: [categoriaId], references: [id], onDelete: Cascade)
+  creator     User              @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  objectives  Objective[]
+  updates     UserEventUpdate[]
+  followed    eventFollows[]
+}
+
+model eventFollows {
+  followerId Int
+  eventId    Int
+  event      Events @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  follower   User   @relation(fields: [followerId], references: [id], onDelete: Cascade)
+
+  @@id([followerId, eventId])
+}
+
+model Objective {
+  id      Int               @id @default(autoincrement())
+  eventId Int
+  name    String
+  event   Events            @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  updates UserEventUpdate[]
+}
+
+model UserEventUpdate {
+  eventId     Int
+  userId      Int
+  objectiveId Int
+  message     String
+  event       Events    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  objective   Objective @relation(fields: [objectiveId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([eventId, userId, objectiveId])
+}
+
+model Notification {
+  id        Int               @id @default(autoincrement())
+  userId    Int
+  message   String
+  read      Boolean           @default(false)
+  createdAt DateTime          @default(now())
+  user      User              @relation("Notification", fields: [userId], references: [id])
+
+ }

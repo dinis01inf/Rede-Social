@@ -1,0 +1,26 @@
+paths:
+  /api/users/:
+    post:
+      tags: [Users]
+      summary: Cria um novo utilizador
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [fullName, email, password]
+              properties:
+                fullName:
+                  type: String
+                  example: "João baião"
+                email:
+                  type: email
+                  example: "joao@mail.pt"
+                password:
+                  type: String
+                  example: "123456"
+      responses:
+        200:
+          description: Sucesso
+

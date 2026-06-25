@@ -1,0 +1,23 @@
+paths:
+  /api/userFollows/:
+    delete:
+      tags: [uFollow]
+      summary: Acaba uma  ligação de seguidor entre dois utilisadores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [followerId, followingId]
+              properties:
+                followerId:
+                  type: Number
+                  example: 2
+                followingId:
+                  type: Number
+                  example: 3
+
+      responses:
+        200:
+          description: Sucesso

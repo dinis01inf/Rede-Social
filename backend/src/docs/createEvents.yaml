@@ -1,0 +1,38 @@
+paths:
+  /api/events/:
+    post:
+      tags: [Events]
+      summary: Cria um novo evento
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [categoria, startDate, endDate, name, description, visibility, objectives]
+              properties:
+                categoria:
+                  type: int
+                  example: 1
+                startDate:
+                  type: Date
+                  example: "2026-07-22"
+                endDate:
+                  type: Date
+                  example: "2026-07-23"
+                name:
+                  type: String
+                  example: "eventoNovo"
+                description:
+                  type: String
+                  example: "eventoNovo é este aquii"
+                visibility:
+                  type: boolean
+                  example: false
+                objectives:
+                  type: List
+                  example: ["eventoNovo", "eventoMaisNovo"]
+
+      responses:
+        200:
+          description: Sucesso

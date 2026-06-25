@@ -1,0 +1,15 @@
+paths:
+  /api/category/search:
+    get:
+      tags: [Category]
+      summary: retorna as categorias com a keyword no nome da categoria
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          schema:
+            type: String
+            example: "a"
+      responses:
+        200:
+          description: Sucesso

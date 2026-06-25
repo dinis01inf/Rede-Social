@@ -1,0 +1,20 @@
+paths:
+  /api/category/:
+    post:
+      tags: [Category]
+      summary: Cria uma nova categoria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [nome]
+              properties:
+                nome:
+                  type: String
+                  example: "NovaCategoria"
+
+      responses:
+        200:
+          description: Sucesso

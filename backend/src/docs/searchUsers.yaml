@@ -1,0 +1,15 @@
+paths:
+  /api/users/search:
+    get:
+      tags: [Users]
+      summary: retorna os utilizadores com a keyword no nome de utilizador
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          schema:
+            type: String
+            example: "a"
+      responses:
+        200:
+          description: Sucesso
